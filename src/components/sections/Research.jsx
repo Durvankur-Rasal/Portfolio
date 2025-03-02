@@ -1,6 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { FileText, ExternalLink } from "lucide-react";
-import paper from "../../../public/2025013301.pdf";
 import paperImage from "../../../public/paper.webp";
 
 const researchPapers = [
@@ -10,7 +9,7 @@ const researchPapers = [
     description:
       "Presented at an IEEE Conference, this research explores the use of BART and PEGASUS models for legal document summarization, improving accuracy with fine-tuning on the BillSum dataset.",
     tags: ["Legal NLP", "BART", "PEGASUS", "BillSum Dataset", "ROUGE Evaluation"],
-    paperUrl: paper, // Replace with actual file link
+    paperUrl: "https://drive.google.com/file/d/15yHkBtk8vZE_Pb7osElzcB5_DHUCs37w/view?usp=sharing", // Replace with actual file link
     image: paperImage,
     ieeeUrl: "#", // Add IEEE publication link if available
   },

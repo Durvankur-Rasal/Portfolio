@@ -85,7 +85,7 @@ export function About() {
               className="rounded-full glow bg-gradient-to-r from-primary to-blue-600 hover:bg-primary/90 hover:blue-600/90"
               size="lg"
             >
-              <a href="/Durvankur_Rasal_Resume.pdf" download="Durvankur_Rasal_Resume.pdf">
+              <a href="https://drive.google.com/file/d/15yHkBtk8vZE_Pb7osElzcB5_DHUCs37w/view?usp=sharing" download="Durvankur_Rasal_Resume.pdf">
                 <Download className="mr-2 h-5 w-5" />
                 Download Resume
               </a>
