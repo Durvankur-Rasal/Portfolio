@@ -12,12 +12,13 @@ import { ArrowLeft, ArrowRight, ArrowUpRight, Github } from "lucide-react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
-import { Navigation } from "swiper/modules";
-import churn from "../../../public/churn.webp";
-import Health from "../../../public/health-nodes.webp";
-import potato from "../../../public/potato.webp";
-import job from "../../../public/job.webp";
-import crop from "../../../public/crop.webp";
+import "swiper/css/pagination";
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import churn from "../../assets/churn-predict.png";
+import Health from "../../assets/health.webp";
+import potato from "../../assets/potato-disease.jpeg";
+import job from "../../assets/job-portal.jpg";
+import crop from "../../assets/crop2.webp";
 
 const projects = [
   {
@@ -74,23 +75,29 @@ const projects = [
 
 export function Projects() {
   return (
-    <section id="projects" className="py-6 sm:py-12 relative overflow-hidden">
-      <div className="section-container">
+    <section id="projects" className="py-12 relative overflow-hidden bg-secondary/50 dark:bg-gray-900/30">
+      <div className="section-container max-w-6xl mx-auto">
         <div className="flex flex-col items-center text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl font-bold gradient-text">My Projects</h2>
-          <p className="text-muted-foreground max-w-2xl mt-6">
+          <h2 className="text-4xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 text-transparent bg-clip-text">
+            My Projects
+          </h2>
+          <p className="text-muted-foreground max-w-3xl mt-4 text-lg">
             Here are some of my recent projects. Each one presented unique challenges and opportunities to apply my skills.
           </p>
         </div>
 
+        {/* Swiper for Smooth Scrolling with Infinite Loop */}
         <Swiper
-          modules={[Navigation]}
+          modules={[Navigation, Pagination, Autoplay]}
           spaceBetween={30}
           slidesPerView={1}
           navigation={{
             nextEl: ".swiper-button-next",
             prevEl: ".swiper-button-prev",
           }}
+          pagination={{ clickable: true }}
+          autoplay={{ delay: 3000, disableOnInteraction: false }}
+          loop={true} // Infinite looping enabled
           className="project-slider"
         >
           {projects.map((project) => (
@@ -98,10 +105,10 @@ export function Projects() {
               <ProjectCard project={project} />
             </SwiperSlide>
           ))}
-          <div className="swiper-button-prev text-primary">
+          <div className="swiper-button-prev text-primary cursor-pointer">
             <ArrowLeft size={32} />
           </div>
-          <div className="swiper-button-next text-primary">
+          <div className="swiper-button-next text-primary cursor-pointer">
             <ArrowRight size={32} />
           </div>
         </Swiper>
@@ -112,16 +119,16 @@ export function Projects() {
 
 function ProjectCard({ project }) {
   return (
-    <Card className="project-card overflow-hidden shadow-lg rounded-xl w-[70%] mx-auto h-[700px]">
+    <Card className="project-card overflow-hidden shadow-lg rounded-2xl w-[80%] mx-auto h-[650px] transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
       <CardHeader>
-        <CardTitle>{project.title}</CardTitle>
-        <CardDescription>{project.description}</CardDescription>
+        <CardTitle className="text-xl font-semibold text-gray-900 dark:text-white">{project.title}</CardTitle>
+        <CardDescription className="text-gray-700 dark:text-gray-300">{project.description}</CardDescription>
       </CardHeader>
       <CardContent>
         <img src={project.image} alt={project.title} className="w-full h-[350px] object-cover rounded-md" />
         <div className="flex flex-wrap gap-2 mt-4">
           {project.tags.map((tag) => (
-            <Badge key={tag} className="bg-primary/10 text-foreground">
+            <Badge key={tag} className="bg-primary/10 text-foreground text-sm px-3 py-1">
               {tag}
             </Badge>
           ))}
@@ -129,13 +136,13 @@ function ProjectCard({ project }) {
       </CardContent>
       <CardFooter className="flex justify-between">
         <Button asChild variant="outline" size="sm">
-          <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
-            <Github className="mr-2 h-4 w-4" /> View Code
+          <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
+            <Github className="h-4 w-4" /> View Code
           </a>
         </Button>
-        <Button asChild size="sm" className="bg-gradient-to-r from-primary to-blue-600">
-          <a href={project.demoUrl} target="_blank" rel="noopener noreferrer">
-            Live Demo <ArrowUpRight className="ml-2 h-4 w-4" />
+        <Button asChild size="sm" className="bg-gradient-to-r from-primary to-blue-600 hover:scale-105 transition-transform">
+          <a href={project.demoUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
+            Live Demo <ArrowUpRight className="h-4 w-4" />
           </a>
         </Button>
       </CardFooter>

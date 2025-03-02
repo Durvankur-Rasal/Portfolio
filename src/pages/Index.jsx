@@ -19,7 +19,7 @@ function Index() {
         <Research />
         <Contact />
       </main>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }

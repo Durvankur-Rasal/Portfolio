@@ -2,13 +2,14 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, Moon, Sun, X } from "lucide-react";
 import { useTheme } from "@/components/ThemeProvider";
+import profileImage from "../assets/durvankur.jpg";
 
 const navItems = [
   { label: "Home", href: "#home" },
   { label: "About", href: "#about" },
   { label: "Skills", href: "#skills" },
   { label: "Projects", href: "#projects" },
-  {label:"Research", href:"#research"},
+  { label: "Research", href: "#research" },
   { label: "Contact", href: "#contact" }
 ];
 
@@ -22,19 +23,34 @@ export function Nav() {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
       const sections = document.querySelectorAll("section[id]");
-      let current = "";
+      let current = "home"; // Default to Home
+  
       sections.forEach((section) => {
         if (section.getBoundingClientRect().top <= 100) {
-          current = section.getAttribute("id") || "";
+          current = section.getAttribute("id") || "home";
         }
       });
-      if (current && current !== activeSection) {
-        setActiveSection(current);
-      }
+  
+      setActiveSection(current);
     };
+  
+    // Run on mount to set the correct active section
+    handleScroll();
+  
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [activeSection]);
+  }, []);
+  
+
+  // Fix Home Click Issue
+  const handleNavClick = (href) => {
+    if (href === "#home") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
+    }
+    setMobileMenuOpen(false);
+  };
 
   return (
     <header
@@ -46,24 +62,42 @@ export function Nav() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <nav className="flex items-center justify-between">
-          <a href="#home" className="text-xl font-display font-semibold group">
-            <span className="bg-gradient-to-r from-primary to-violet-500 bg-clip-text text-transparent">Durvankur</span>
-            <span className="text-gray-700 dark:text-gray-300 group-hover:text-gray-500 transition-colors">Rasal</span>
-          </a>
-          
+          {/* Profile + Name */}
+          <div className="flex items-center space-x-3">
+            <img
+              src={profileImage}
+              alt="Durvankur Rasal"
+              className="w-10 h-10 rounded-full border-2 border-[#915EFF] shadow-md"
+            />
+            <a
+              href="#home"
+              className="text-xl font-display font-semibold group flex items-center"
+              onClick={() => handleNavClick("#home")}
+            >
+              <span className="bg-gradient-to-r from-primary to-violet-500 bg-clip-text text-transparent">
+                Durvankur
+              </span>
+              <span className="text-gray-700 dark:text-gray-300 group-hover:text-gray-500 transition-colors">
+                Rasal
+              </span>
+            </a>
+          </div>
+
+          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-4">
             {navItems.map((item) => (
-              <a
+              <button
                 key={item.href}
-                href={item.href}
+                onClick={() => handleNavClick(item.href)}
                 className={`nav-item ${
                   activeSection === item.href.substring(1) ? "active" : ""
                 }`}
               >
                 {item.label}
-              </a>
+              </button>
             ))}
             
+            {/* Theme Toggle */}
             <Button
               variant="ghost"
               size="icon"
@@ -79,6 +113,7 @@ export function Nav() {
             </Button>
           </div>
           
+          {/* Mobile Menu Button */}
           <div className="flex items-center md:hidden">
             <Button
               variant="ghost"
@@ -105,20 +140,20 @@ export function Nav() {
           </div>
         </nav>
         
+        {/* Mobile Menu */}
         {mobileMenuOpen && (
           <div className="md:hidden pt-4 pb-2 animate-fade-in">
             <div className="flex flex-col space-y-2">
               {navItems.map((item) => (
-                <a
+                <button
                   key={item.href}
-                  href={item.href}
+                  onClick={() => handleNavClick(item.href)}
                   className={`nav-item text-center ${
                     activeSection === item.href.substring(1) ? "active" : ""
                   }`}
-                  onClick={() => setMobileMenuOpen(false)}
                 >
                   {item.label}
-                </a>
+                </button>
               ))}
             </div>
           </div>
