@@ -36,7 +36,7 @@ export function About() {
           <div className="space-y-6 animate-slide-left">
             <h3 className="text-xl sm:text-2xl font-semibold">
               <span className="relative inline-block">
-                <span className="absolute inset-x-0 bottom-0 h-3 bg-primary/10 dark:primary/20 -z-10"></span>
+                <span className="absolute inset-x-0 bottom-0 h-3  dark:primary/20 -z-10"></span>
                 Artificial Intelligence & Data Science Student
               </span> at VIIT Pune
             </h3>
