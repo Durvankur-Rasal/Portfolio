@@ -1,6 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { Download, Code, BrainCircuit, Lightbulb, LinkIcon } from "lucide-react";
 
+const resume = "https://drive.google.com/file/d/1SDjMx6_o4m4otTBXSK4l787HxY1lElMF/view?usp=sharing";
+
 export function About() {
   return (
     <section id="about" className="relative overflow-hidden">
@@ -85,7 +87,7 @@ export function About() {
               className="rounded-full glow bg-gradient-to-r from-primary to-blue-600 hover:bg-primary/90 hover:blue-600/90"
               size="lg"
             >
-              <a href="https://drive.google.com/file/d/1SDjMx6_o4m4otTBXSK4l787HxY1lElMF/view?usp=sharing" download="">
+              <a href={resume} >
                 <Download className="mr-2 h-5 w-5" />
                 Download Resume
               </a>
