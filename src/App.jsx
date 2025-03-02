@@ -13,7 +13,7 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <ThemeProvider defaultTheme="system">
       <TooltipProvider>
-        <BrowserRouter>
+        <BrowserRouter basename="/Portfolio"> {/* ✅ Fix: Set basename */}
           <Toaster />
           <Sonner />
           <Routes>
